@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">weather-group1-android</string>
+    <string name="app_name">Weather App</string>
+    <string name="weather">Weather</string>
+    <string name="update_at">Update at</string>
+    <string name="clear_sky">Clear Sky</string>
+    <string name="_24_c">24°C</string>
+    <string name="min_temp">Min temp</string>
+    <string name="max_temp">Max temp</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="_5_30pm">5:30pm</string>
+    <string name="sunset">Sunset</string>
+    <string name="wind">Wind</string>
+    <string name="pressure">Pressure</string>
 </resources>
