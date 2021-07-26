@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,11 +10,19 @@
     android:background="@drawable/gradient_bg"
     tools:context=".network.ui.MainActivity">
 
+    <Button
+        android:id="@+id/foreground_only_location_button"
+        android:layout_width="wrap_content"
+        android:textColor="@color/white"
+        android:text="Click me"
+        android:layout_height="wrap_content"></Button>
+
     <RelativeLayout
         android:id="@+id/mainContainer"
         android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:id="@+id/addressContainer"
             android:orientation="vertical"
@@ -42,6 +51,14 @@
             android:layout_centerInParent="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/output_text_view"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:text="Location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </TextView>
             <TextView
                 android:id="@+id/status"
                 android:textSize="18sp"
