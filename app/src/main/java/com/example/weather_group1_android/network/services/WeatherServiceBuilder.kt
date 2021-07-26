@@ -1,6 +1,3 @@
-/**
- * This class allows to build our services with retrofit and interface.
- * */
 package com.example.weather_group1_android.network.services
 
 import android.content.Context
@@ -13,6 +10,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+/**
+ * This class allows to build our services with retrofit and interface.
+ * */
 class WeatherServiceBuilder {
     companion object {
         const val baseUrl = "https://api.openweathermap.org/"
