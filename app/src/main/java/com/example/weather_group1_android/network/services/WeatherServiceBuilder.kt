@@ -16,9 +16,10 @@ import java.util.concurrent.TimeUnit
 class WeatherServiceBuilder {
     companion object {
         const val baseUrl = "https://api.openweathermap.org/"
-        const val q = "Paris,fr"
-        const val lang = "fr"
+        const val lat = "48.8566133"
+        const val lon = "2.3522217"
         const val units = "metric"
+        const val exclude = "minutely,hourly"
         const val AppId  = "e3e53a88fe0338f43a52da7aee06e41c"
     }
 
@@ -55,5 +56,5 @@ class WeatherServiceBuilder {
      * Allows the service to be consumed asynchronously
      * */
     suspend fun getAssets(): Response<WeatherAsset> = getRetrofit().create(WeatherService::class.java)
-        .assets(q, lang, units, AppId)
+        .assets(lat, lon, units, exclude, AppId)
 }

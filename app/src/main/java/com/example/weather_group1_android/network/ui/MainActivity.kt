@@ -58,8 +58,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             foregroundOnlyLocationService = binder.service
             foregroundOnlyLocationServiceBound = true
             Log.d(TAG, "connected")
-            Log.d(TAG, "Service Not Bound $foregroundOnlyLocationService")
-            foregroundOnlyLocationService?.subscribeToLocationUpdates()
+            // foregroundOnlyLocationService?.subscribeToLocationUpdates()
                 ?: Log.d(TAG, "Service Not Bound")
 
             // TODO: Step 1.0, Review Permissions: Checks and requests if needed.
@@ -115,7 +114,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             }
         }
 
-        //loadAssets()
+        loadAssets()
     }
 
     override fun onStart() {
@@ -305,7 +304,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
     private fun displayResults(response: WeatherAsset?) {
         response?.let {
-            binding.temp.text = response.list[0].main.temp.toString() + "°C"
+            binding.temp.text = response.current.temp.toString() + "°C"
         }
     }
     private fun displayError() {
