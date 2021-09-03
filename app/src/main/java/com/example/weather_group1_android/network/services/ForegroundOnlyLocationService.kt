@@ -65,7 +65,6 @@ class ForegroundOnlyLocationService : Service() {
     private val TAG = "ForegroundOnlyLocationService"
 
     override fun onCreate() {
-        Log.d("Test", "onCreate")
         Log.d(TAG, "onCreate()")
 
         notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

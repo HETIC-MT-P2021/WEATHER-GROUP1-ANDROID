@@ -1,4 +1,6 @@
 package com.example.weather_group1_android.network.ui
+
+import android.content.BroadcastReceiver
 import android.Manifest
 import android.content.*
 import android.content.pm.PackageManager
@@ -34,6 +36,8 @@ private const val REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE = 34
 class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
     private var foregroundOnlyLocationServiceBound = false
 
+    private lateinit var coordinates: String
+
     // Provides location updates for while-in-use feature.
     private var foregroundOnlyLocationService: ForegroundOnlyLocationService? = null
 
@@ -53,11 +57,24 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             val binder = service as ForegroundOnlyLocationService.LocalBinder
             foregroundOnlyLocationService = binder.service
             foregroundOnlyLocationServiceBound = true
+            Log.d(TAG, "connected")
+            Log.d(TAG, "Service Not Bound $foregroundOnlyLocationService")
+            foregroundOnlyLocationService?.subscribeToLocationUpdates()
+                ?: Log.d(TAG, "Service Not Bound")
+
+            // TODO: Step 1.0, Review Permissions: Checks and requests if needed.
+            // if (foregroundPermissionApproved()) {
+            //     foregroundOnlyLocationService?.subscribeToLocationUpdates()
+            //         ?: Log.d(TAG, "Service Not Bound")
+            // } else {
+            //     requestForegroundPermissions()
+            // }
         }
 
         override fun onServiceDisconnected(name: ComponentName) {
             foregroundOnlyLocationService = null
             foregroundOnlyLocationServiceBound = false
+            Log.d(TAG, "disconnected")
         }
     }
 
@@ -74,7 +91,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         setContentView(binding.root)
 
         foregroundOnlyBroadcastReceiver = ForegroundOnlyBroadcastReceiver()
-        Log.d(TAG, "data $foregroundOnlyBroadcastReceiver")
 
         sharedPreferences =
             getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
@@ -103,6 +119,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     override fun onStart() {
+        Log.d(TAG, "onStart()")
         super.onStart()
 
         updateButtonState(
@@ -115,6 +132,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     override fun onResume() {
+        Log.d(TAG, "onResume()")
         super.onResume()
         LocalBroadcastManager.getInstance(this).registerReceiver(
             foregroundOnlyBroadcastReceiver,
@@ -124,6 +142,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     override fun onPause() {
+        Log.d(TAG, "onPause()")
         LocalBroadcastManager.getInstance(this).unregisterReceiver(
             foregroundOnlyBroadcastReceiver
         )
@@ -131,6 +150,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     override fun onStop() {
+        Log.d(TAG, "onStop()")
         if (foregroundOnlyLocationServiceBound) {
             unbindService(foregroundOnlyServiceConnection)
             foregroundOnlyLocationServiceBound = false
@@ -173,8 +193,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
                     // Request permission
                     ActivityCompat.requestPermissions(
                         this@MainActivity,
-                        arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
-                        //arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                         REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
                     )
                 }
@@ -183,8 +202,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             Log.d(TAG, "Request foreground only permission")
             ActivityCompat.requestPermissions(
                 this@MainActivity,
-                arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),
-                //arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 REQUEST_FOREGROUND_ONLY_PERMISSIONS_REQUEST_CODE
             )
         }
@@ -197,7 +215,6 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        Log.d(TAG, "Coming..")
         Log.d(TAG, "onRequestPermissionResult")
 
         when (requestCode) {
@@ -247,7 +264,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
 
     private fun logResultsToScreen(output: String) {
         val outputWithPreviousLogs = "$output\n${outputTextView.text}"
+        coordinates = outputWithPreviousLogs
         Log.d(TAG, "Foreground location: $outputWithPreviousLogs")
+        Log.d(TAG, "Foreground coordinates: $coordinates")
         outputTextView.text = outputWithPreviousLogs
     }
 
