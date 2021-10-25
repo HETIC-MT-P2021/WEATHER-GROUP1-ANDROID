@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE)
 
         foregroundOnlyLocationButton = findViewById(R.id.foreground_only_location_button)
-        outputTextView = findViewById(R.id.output_text_view)
+        outputTextView = findViewById(R.id.address)
 
         foregroundOnlyLocationButton.setOnClickListener {
             val enabled = sharedPreferences.getBoolean(
@@ -304,7 +304,9 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
     private fun displayResults(response: WeatherAsset?) {
         response?.let {
-            binding.temp.text = response.current.temp.toString() + "°C"
+            Log.d(TAG, "Api data: $response")
+            binding.timezone.text = response.timezone
+            binding.temp.text = (response.current.temp.toInt()).toString() + "°C"
         }
     }
     private fun displayError() {

@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Weather App</string>
-    <string name="weather">Weather</string>
-    <string name="update_at">Update at</string>
+    <string name="weather">Météo</string>
     <string name="clear_sky">Clear Sky</string>
     <string name="_24_c">24°C</string>
     <string name="min_temp">Min temp</string>
@@ -22,4 +21,15 @@
     <string name="settings">Settings</string>
     <string name="start_location_updates_button_text">Start receiving location updates</string>
     <string name="stop_location_updates_button_text">Stop receiving location updates</string>
+
+    <string name="update">Update</string>
+    <string name="today">Aujourd\'hui</string>
+    <string name="_92">92%</string>
+    <string name="_21_15">21°/15°</string>
+    <string name="tuesday">Mardi</string>
+    <string name="wednesday">Mercredi</string>
+    <string name="thursday">Jeudi</string>
+    <string name="friday">Vendredi</string>
+    <string name="saturday">Samedi</string>
+    <string name="sunday">Dimanche</string>
 </resources>
