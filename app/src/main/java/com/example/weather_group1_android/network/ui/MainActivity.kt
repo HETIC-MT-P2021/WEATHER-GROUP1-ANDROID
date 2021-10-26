@@ -287,6 +287,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     private fun loadAssets() {
+
         if(!WeatherService.isNetworkAvailable(this)) {
             displayError()
             return
@@ -307,6 +308,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             Log.d(TAG, "Api data: $response")
             binding.timezone.text = response.timezone
             binding.temp.text = (response.current.temp.toInt()).toString() + "°C"
+            binding.day3TempMinMax.text = response.daily[0].temp.min.toString() + "°C"
         }
     }
     private fun displayError() {
