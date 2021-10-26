@@ -32,4 +32,10 @@
     <string name="friday">Vendredi</string>
     <string name="saturday">Samedi</string>
     <string name="sunday">Dimanche</string>
+    <string name="tomorow">Demain</string>
+    <string name="Jour3">Jour 3</string>
+    <string name="Jour4">Jour 4</string>
+    <string name="Jour5">Jour 5</string>
+    <string name="Jour6">Jour 6</string>
+    <string name="Jour7">Jour 7</string>
 </resources>

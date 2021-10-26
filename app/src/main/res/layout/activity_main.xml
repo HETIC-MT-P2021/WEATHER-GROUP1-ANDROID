@@ -128,7 +128,7 @@
                 android:id="@+id/day2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tuesday" />
+                android:text="@string/tomorow" />
 
             <TextView
                 android:id="@+id/day2_humidity"
@@ -161,7 +161,7 @@
                 android:id="@+id/day3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/wednesday" />
+                android:text="@string/Jour3" />
 
             <TextView
                 android:id="@+id/day3_humidity"
@@ -194,7 +194,7 @@
                 android:id="@+id/day4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/thursday" />
+                android:text="@string/Jour4" />
 
             <TextView
                 android:id="@+id/day4_humidity"
@@ -227,7 +227,7 @@
                 android:id="@+id/day5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/friday" />
+                android:text="@string/Jour5" />
 
             <TextView
                 android:id="@+id/day5_humidity"
@@ -260,7 +260,7 @@
                 android:id="@+id/day6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/saturday" />
+                android:text="@string/Jour6" />
 
             <TextView
                 android:id="@+id/day6_humidity"
@@ -293,7 +293,7 @@
                 android:id="@+id/day7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/sunday" />
+                android:text="@string/Jour7" />
 
             <TextView
                 android:id="@+id/day7_humidity"
