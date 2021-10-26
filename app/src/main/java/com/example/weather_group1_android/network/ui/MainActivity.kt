@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun displayResults(response: WeatherAsset?) {
         response?.let {
-            binding.temp.text = response.list[0].main.temp.toString() + "°C"
+            binding.temp.text = (response.list[0].main.temp.toInt()).toString() + "°C"
         }
     }
     private fun displayError() {
