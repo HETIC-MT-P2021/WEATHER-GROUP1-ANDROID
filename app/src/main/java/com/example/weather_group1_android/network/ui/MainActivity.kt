@@ -12,6 +12,7 @@ import android.os.IBinder
 import android.provider.Settings
 import android.util.Log
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -287,7 +288,8 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
     }
 
     private fun loadAssets() {
-
+        // val progressBar = findViewById<ProgressBar>(R.id.progress_Bar)
+        // progressBar.visibility = "visible"
         if(!WeatherService.isNetworkAvailable(this)) {
             displayError()
             return
@@ -296,6 +298,7 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             val response = WeatherService.getAssets()
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
+                    // progressBar.visibility = "invisible"
                     displayResults(response.body())
                 } else {
                     displayError()
@@ -308,7 +311,27 @@ class MainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceCh
             Log.d(TAG, "Api data: $response")
             binding.timezone.text = response.timezone
             binding.temp.text = (response.current.temp.toInt()).toString() + "°C"
-            binding.day3TempMinMax.text = response.daily[0].temp.min.toString() + "°C"
+
+            //for (i in 1..7) {
+            //    binding.day3TempMinMax.text = (response.daily[i].temp.max.toInt()).toString() + "°/" + (response.daily[i].temp.min.toInt()).toString()
+            //}
+
+            // Daily Humidity
+            binding.day1Humidity.text = (response.daily[0].humidity.toInt()).toString() + "%"
+            binding.day2Humidity.text = (response.daily[1].humidity.toInt()).toString() + "%"
+            binding.day3Humidity.text = (response.daily[2].humidity.toInt()).toString() + "%"
+            binding.day4Humidity.text = (response.daily[3].humidity.toInt()).toString() + "%"
+            binding.day5Humidity.text = (response.daily[4].humidity.toInt()).toString() + "%"
+            binding.day6Humidity.text = (response.daily[5].humidity.toInt()).toString() + "%"
+            binding.day7Humidity.text = (response.daily[6].humidity.toInt()).toString() + "%"
+            // Daily Temp min and max
+            binding.day1TempMinMax.text = (response.daily[0].temp.max.toInt()).toString() + "°/" + (response.daily[0].temp.min.toInt()).toString()
+            binding.day2TempMinMax.text = (response.daily[1].temp.max.toInt()).toString() + "°/" + (response.daily[1].temp.min.toInt()).toString()
+            binding.day3TempMinMax.text = (response.daily[2].temp.max.toInt()).toString() + "°/" + (response.daily[2].temp.min.toInt()).toString()
+            binding.day4TempMinMax.text = (response.daily[3].temp.max.toInt()).toString() + "°/" + (response.daily[3].temp.min.toInt()).toString()
+            binding.day5TempMinMax.text = (response.daily[4].temp.max.toInt()).toString() + "°/" + (response.daily[4].temp.min.toInt()).toString()
+            binding.day6TempMinMax.text = (response.daily[5].temp.max.toInt()).toString() + "°/" + (response.daily[5].temp.min.toInt()).toString()
+            binding.day7TempMinMax.text = (response.daily[6].temp.max.toInt()).toString() + "°/" + (response.daily[6].temp.min.toInt()).toString()
         }
     }
     private fun displayError() {
